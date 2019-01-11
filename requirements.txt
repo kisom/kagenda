@@ -1,0 +1,7 @@
+darkskylib
+google-api-python-client
+natural
+oauth2client
+pyserial
+pyttsx3
+pytz
