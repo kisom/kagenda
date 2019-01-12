@@ -8,6 +8,6 @@ setup(
     license='MIT',
     author='kyle',
     author_email='coder@kyleisom.net',
-    description='Every morning, I like to get my daily kagenda.',
-    scripts=['bin/kagenda']
+    description='Every morning, I like to get my daily agenda.',
+    scripts=['bin/agenda']
 )
