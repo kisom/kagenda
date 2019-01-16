@@ -11,7 +11,12 @@ def main():
                         help="speak today's overview")
     args = parser.parse_args()
 
-    agenda.today(args.print, args.speak)
+    while True:
+        try:
+            agenda.today(args.print, args.speak)
+        except:
+            continue
+        break
 
 
 if __name__ == '__main__':

@@ -68,7 +68,8 @@ def today(lpt=None, speak=False):
         else:
             uart = serial.Serial(port=lpt, baudrate=19200, timeout=3000)
             lpr = adafruit_thermal_printer.get_printer_class(2.68)(uart)
-            lpr.write(printer_text)
+            lpr.print(printer_text)
+            lpr.feed(2)
 
     if speak:
         speech.init()
