@@ -52,6 +52,7 @@ class TodoList:
     def __len__(self):
         return len(self.cards)
 
+
 def get_todo_list(path='credentials.json'):
     creds = get_credentials(path)
     client = TrelloClient(api_key=creds.key, api_secret=creds.token)

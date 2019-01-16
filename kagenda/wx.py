@@ -14,8 +14,8 @@ def f2c(temp, low=False):
         return math.floor(ctemp)
     return math.ceil(ctemp)
 
-def forecast():
-    api_key = get_api_key()
+def forecast(path='credentials.json'):
+    api_key = get_api_key(path)
     forecast = darksky.forecast(api_key, config.OAKLAND[0], config.OAKLAND[1])
     return Forecast(forecast)
 

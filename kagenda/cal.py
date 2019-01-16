@@ -4,6 +4,8 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 from kagenda import config
+import os
+
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -21,10 +23,11 @@ def today_and_tomorrow(date):
 # get_events is slightly modified from the stock Google example code.
 def get_events(date, calendar='primary', max_events=5):
     """get_events returns the events for date from the primary calendar."""
-    store = file.Storage('token.json')
+    store = file.Storage(config.get_creds_file('token.json'))
     creds = store.get()
     if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials.json', SCOPES)
+        creds_json = config.get_creds_file('credentials.json')
+        flow = client.flow_from_clientsecrets(creds_json, SCOPES)
         creds = tools.run_flow(flow, store)
     service = build('calendar', 'v3', http=creds.authorize(Http()))
 

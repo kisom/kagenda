@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='kagenda',
-    version='1.2.0',
+    version='1.3.0',
     packages=['kagenda'],
     url='https://github.com/kisom/kagenda',
     license='MIT',

@@ -1,4 +1,4 @@
-from kagenda import cal, printer, speech, todo, wx
+from kagenda import cal, config, printer, speech, todo, wx
 import datetime
 
 
@@ -51,11 +51,12 @@ def today_for_speaking(date, forecast, events_today, events_tomorrow, todos):
 
 
 def today(lpt=None, speak=False):
+    creds = config.get_creds_file('credentials.json')
     date = datetime.date.today()
-    forecast = wx.forecast()
+    forecast = wx.forecast(creds)
     events_today = cal.get_events(date)
     events_tomorrow = cal.get_events(date + datetime.timedelta(days=1))
-    todos = todo.get_todo_list()
+    todos = todo.get_todo_list(creds)
 
     if lpt:
         printer_text = today_for_printing(date, forecast, events_today,
