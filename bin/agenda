@@ -6,9 +6,8 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(description="Deliver today's overview.")
-    parser.add_argument("-p", "--print", action='store_true',
-                        help="print out a text overview")
-    parser.add_argument("-s", "--speak", action='store_true',
+    parser.add_argument("-p", "--print", help="print out a text overview")
+    parser.add_argument("-s", "--speak", action='store',
                         help="speak today's overview")
     args = parser.parse_args()
 

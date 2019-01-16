@@ -1,4 +1,6 @@
+import adafruit_thermal_printer
 from kagenda import cal, config, printer, speech, todo, wx
+import serial
 import datetime
 
 
@@ -61,7 +63,12 @@ def today(lpt=None, speak=False):
     if lpt:
         printer_text = today_for_printing(date, forecast, events_today,
                                           events_tomorrow, todos)
-        print(printer_text)
+        if lpt == 'stdout':
+            print(printer_text)
+        else:
+            uart = serial.Serial(port=lpt, baudrate=19200, timeout=3000)
+            lpr = adafruit_thermal_printer.get_printer_class(2.68)(uart)
+            lpr.write(printer_text)
 
     if speak:
         speech.init()

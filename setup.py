@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='kagenda',
-    version='1.3.0',
+    version='1.3.2',
     packages=['kagenda'],
     url='https://github.com/kisom/kagenda',
     license='MIT',
@@ -11,6 +11,7 @@ setup(
     description='Every morning, I like to get my daily agenda.',
     scripts=['bin/agenda'],
     install_requires=[
+        "adafruit-circuitpython-thermal-printer",
         "darkskylib",
         "google-api-python-client",
         "natural",

@@ -1,3 +1,4 @@
+adafruit-circuitpython-thermal-printer
 darkskylib
 google-api-python-client
 natural
