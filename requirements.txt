@@ -3,5 +3,6 @@ google-api-python-client
 natural
 oauth2client
 pyserial
+py-trello
 pyttsx3
 pytz

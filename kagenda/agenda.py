@@ -1,8 +1,8 @@
-from kagenda import cal, printer, speech, wx
+from kagenda import cal, printer, speech, todo, wx
 import datetime
 
 
-def today_for_printing(date, forecast, events_today, events_tomorrow):
+def today_for_printing(date, forecast, events_today, events_tomorrow, todos):
     date = datetime.date.today()
     s = date.isoformat() + '\n==========\n\n'
     s += forecast.string() + '\n'
@@ -22,10 +22,12 @@ def today_for_printing(date, forecast, events_today, events_tomorrow):
         for event in events_tomorrow:
             s += event.string() + '\n'
 
+    if len(todos) != 0:
+        s += '\nTODO\n' + todos.string()
     return s
 
 
-def today_for_speaking(date, forecast, events_today, events_tomorrow):
+def today_for_speaking(date, forecast, events_today, events_tomorrow, todos):
     s = 'Today is ' + speech.day_to_text(date) + '. '
     s += forecast.text()
 
@@ -43,6 +45,8 @@ def today_for_speaking(date, forecast, events_today, events_tomorrow):
         for event in events_tomorrow:
             s += event.text() + '\n'
 
+    if len(todos) != 0:
+        s += '\nTwo dues\n' + todos.text()
     return s
 
 
@@ -51,14 +55,16 @@ def today(lpt=None, speak=False):
     forecast = wx.forecast()
     events_today = cal.get_events(date)
     events_tomorrow = cal.get_events(date + datetime.timedelta(days=1))
+    todos = todo.get_todo_list()
 
     if lpt:
         printer_text = today_for_printing(date, forecast, events_today,
-                                          events_tomorrow)
+                                          events_tomorrow, todos)
         print(printer_text)
 
     if speak:
         speech.init()
-        script = today_for_speaking(date, forecast, events_today, events_tomorrow)
+        script = today_for_speaking(date, forecast, events_today,
+                                    events_tomorrow, todos)
         speech.ENGINE.say(script)
         speech.ENGINE.runAndWait()
